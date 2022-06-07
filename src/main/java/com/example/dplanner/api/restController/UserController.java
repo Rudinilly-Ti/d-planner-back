@@ -22,4 +22,9 @@ public class UserController {
     public User create(@Valid @RequestBody User user) {
         return service.create(user);
     }
+
+    @PostMapping("/search")
+    public User searchUser(@RequestBody String email) {
+        return service.searchUser(email);
+    }
 }
