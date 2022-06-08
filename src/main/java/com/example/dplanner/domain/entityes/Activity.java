@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -27,13 +28,14 @@ public class Activity {
 	@NotBlank(message = "Nome da atividade não pode ser nula")
 	private String nome;
 
+	@NotNull(message = "Cadeira não pode ser nula")
 	@ManyToOne
 	@JoinColumn(name = "id_subject")
 	private Subject subject;
 
 	private String descricao;
 
-	@NotBlank(message = "Data de entrega não pode ser nula")
+	@NotNull(message = "Data de entrega não pode ser nula")
 	private Date dataDeEntrega;
 
 	@Value("1")
@@ -87,6 +89,7 @@ public class Activity {
 	}
 
 	public void setDataDeEntrega(Date dataDeEntrega) {
+		Date date = new Date();
 		this.dataDeEntrega = dataDeEntrega;
 	}
 
