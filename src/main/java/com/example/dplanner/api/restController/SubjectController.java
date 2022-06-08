@@ -30,7 +30,7 @@ public class SubjectController {
     if (semester.isPresent())
       return ResponseEntity.ok(semester.get());
     else
-      return ResponseEntity.badRequest().build();
+      return ResponseEntity.notFound().build();
   }
 
   @PostMapping
@@ -48,7 +48,7 @@ public class SubjectController {
     if (semester.isPresent())
       return ResponseEntity.ok(semester.get());
     else
-      return ResponseEntity.badRequest().build();
+      return ResponseEntity.notFound().build();
   }
 
   @PutMapping("/{id}")
