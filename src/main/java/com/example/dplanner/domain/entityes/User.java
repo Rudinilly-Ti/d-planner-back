@@ -29,7 +29,6 @@ public class User {
     private String email;
 
     @NotBlank(message = "Senha não pode ser nula")
-    @Size(min = 6, max = 15, message = "A senha deve ter entre 6 e 15 caracteres")
     private String senha;
 
     public User() {
