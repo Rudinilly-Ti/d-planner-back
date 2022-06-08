@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_semesters")
 public class Semester {
@@ -30,6 +32,7 @@ public class Semester {
     @NotBlank(message = "Data de fim não pode ser nula")
     private Date dataDeFim;
     
+		@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
