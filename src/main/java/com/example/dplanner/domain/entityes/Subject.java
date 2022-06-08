@@ -1,6 +1,5 @@
 package com.example.dplanner.domain.entityes;
 
-import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -10,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.beans.factory.annotation.Value;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_subjects")
@@ -25,6 +25,8 @@ public class Subject {
 	private String nome;
 
 	private String professor;
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_semester")
 	private Semester semester;

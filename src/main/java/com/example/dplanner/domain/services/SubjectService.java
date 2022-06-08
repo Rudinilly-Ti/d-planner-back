@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.dplanner.api.dto.SubjectDto;
 import com.example.dplanner.domain.entityes.Semester;
 import com.example.dplanner.domain.entityes.Subject;
 import com.example.dplanner.domain.repository.SemesterRepository;
@@ -19,8 +20,18 @@ public class SubjectService {
   @Autowired
   SemesterRepository semesterRepo;
 
-  public Subject create(Subject semester) {
-    return repository.save(semester);
+  public Optional<Subject> create(SubjectDto dto) {
+    var optSemester = semesterRepo.findById(dto.getSemesterId());
+
+    if (optSemester.isEmpty())
+      return Optional.empty();
+
+    var subject = new Subject();
+    subject.setNome(dto.getNome());
+    subject.setProfessor(dto.getProfessor());
+    subject.setSemester(optSemester.get());
+
+    return Optional.of(repository.save(subject));
   }
 
   public Optional<List<Subject>> findBySemesterId(Long semesterId) {
@@ -38,11 +49,19 @@ public class SubjectService {
     return repository.findById(id);
   }
 
-  public Optional<Subject> update(Long id, Subject subject) {
-    if (repository.findById(id).isEmpty())
+  public Optional<Subject> update(Long id, SubjectDto dto) {
+    var optSubject = repository.findById(id);
+    var optSemester = semesterRepo.findById(dto.getSemesterId());
+
+    if (optSubject.isEmpty() || optSemester.isEmpty())
       return Optional.empty();
 
-    subject.setId(id);
+    var subject = optSubject.get();
+
+    subject.setNome(dto.getNome());
+    subject.setProfessor(dto.getProfessor());
+    subject.setSemester(optSemester.get());
+
     return Optional.of(repository.save(subject));
   }
 

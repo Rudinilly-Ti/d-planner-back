@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dplanner.api.dto.SubjectDto;
 import com.example.dplanner.domain.entityes.Subject;
 import com.example.dplanner.domain.services.SubjectService;
 
@@ -23,27 +24,48 @@ public class SubjectController {
   @Autowired
   SubjectService service;
 
+  @GetMapping
   public ResponseEntity<List<Subject>> findBySemesterId(@RequestParam Long semesterId) {
-    return ResponseEntity.of(service.findBySemesterId(semesterId));
+    var semester = service.findBySemesterId(semesterId);
+    if (semester.isPresent())
+      return ResponseEntity.ok(semester.get());
+    else
+      return ResponseEntity.badRequest().build();
   }
 
   @PostMapping
-  public Subject create(@RequestBody Subject subject) {
-    return service.create(subject);
+  public ResponseEntity<Subject> create(@RequestBody SubjectDto dto) {
+    var semester = service.create(dto);
+    if (semester.isPresent())
+      return ResponseEntity.ok(semester.get());
+    else
+      return ResponseEntity.badRequest().build();
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Subject> findById(@PathVariable Long id) {
-    return ResponseEntity.of(service.findById(id));
+    var semester = service.findById(id);
+    if (semester.isPresent())
+      return ResponseEntity.ok(semester.get());
+    else
+      return ResponseEntity.badRequest().build();
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Subject> update(@PathVariable Long id, @RequestBody Subject subject) {
-    return ResponseEntity.of(service.update(id, subject));
+  public ResponseEntity<Subject> update(@PathVariable Long id, @RequestBody SubjectDto dto) {
+    var semester = service.update(id, dto);
+    if (semester.isPresent())
+      return ResponseEntity.ok(semester.get());
+    else
+      return ResponseEntity.badRequest().build();
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<Subject> delete(@PathVariable Long id) {
-    return ResponseEntity.of(service.delete(id));
+    var semester = service.delete(id);
+    if (semester.isPresent())
+      return ResponseEntity.ok(semester.get());
+    else
+      return ResponseEntity.badRequest().build();
   }
 }
