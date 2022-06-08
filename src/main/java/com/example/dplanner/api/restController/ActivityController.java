@@ -62,6 +62,11 @@ public class ActivityController {
 		return service.show(id);
 	}
 	
+	@GetMapping(value = "/listByUser/{id}")
+	public List<Activity> listByUser(@PathVariable(value = "id") Long id){
+		return service.findByUser(id);
+		
+	}
 	@PutMapping(value = "/close")
 	public ResponseEntity<String> CloseActivity(@Valid @RequestBody Activity activity) {
 		Activity activityToUpdate = service.closeActivity(activity);

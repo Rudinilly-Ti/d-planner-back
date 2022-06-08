@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dplanner.domain.entityes.Activity;
+import com.example.dplanner.domain.entityes.Subject;
 import com.example.dplanner.domain.repository.ActivityRepository;
 
 @Service
@@ -33,7 +34,9 @@ public class ActivityService {
 	public List<Activity> index() {
 		return repository.findAll();
 	}
-
+	public List<Activity> findByUser(Long ID) {
+		return repository.findBySubject_Semester_User_id(ID);
+	}
 	public Activity show(Long id) {
 		return repository.findById(id).orElse(null);
 	}
