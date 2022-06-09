@@ -33,6 +33,11 @@ public class UserController {
         return service.create(user);
     }
 
+    @PostMapping("/findUser")
+    public User findByEmail(@RequestBody User user) {
+        return service.findByEmail(user.getEmail());
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
         user.setId(id);
