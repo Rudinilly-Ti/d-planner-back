@@ -53,20 +53,34 @@ public class ActivityController {
 			return new ResponseEntity<>("Erro ao atualizar atividade: " + e.getMessage(), HttpStatus.OK);
 		}
 	}
+
 	@GetMapping
-	public List<Activity> index(){
+	public List<Activity> index() {
 		return service.index();
 	}
+
 	@GetMapping(value = "/show/{id}")
-	public Activity show(@PathVariable(value = "id") Long id){
+	public Activity show(@PathVariable(value = "id") Long id) {
 		return service.show(id);
 	}
-	
+
 	@GetMapping(value = "/listByUser/{id}")
-	public List<Activity> listByUser(@PathVariable(value = "id") Long id){
+	public List<Activity> listByUser(@PathVariable(value = "id") Long id ) {
 		return service.findByUser(id);
-		
+
 	}
+	@GetMapping(value = "/listAllByUser/{id}")
+	public List<Activity> findAllByUser(@PathVariable(value = "id") Long id ) {
+		return service.findAllByUser(id);
+	}
+
+	@GetMapping(value = "/listByUserType/{id}/{type}")
+	public List<Activity> findByType(@PathVariable(value = "id") Long id, 
+			@PathVariable(value = "type") int type) {
+		return service.findByUserAndType(id,type);
+
+	}
+
 	@PutMapping(value = "/close")
 	public ResponseEntity<String> CloseActivity(@Valid @RequestBody Activity activity) {
 		Activity activityToUpdate = service.closeActivity(activity);
