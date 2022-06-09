@@ -22,8 +22,14 @@ public class SemesterController {
     SemesterService service;
 
     @PostMapping
-    public Semester create(@Valid @RequestBody Semester semester) {
-        return service.create(semester);
+    public ResponseEntity<Semester> create(@Valid @RequestBody Semester semester) {
+        
+        Semester semesterTMP = service.create(semester);
+
+        if (semesterTMP != null)
+            return ResponseEntity.ok(semesterTMP);
+        else
+            return ResponseEntity.badRequest().build();
     }
 
     @GetMapping

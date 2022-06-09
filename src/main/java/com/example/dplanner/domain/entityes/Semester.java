@@ -32,7 +32,7 @@ public class Semester {
     
     @ManyToOne
     @JoinColumn(name = "id_user")
-    private User user;
+    private Long userId;
     
     
 	public Semester() {
@@ -77,17 +77,17 @@ public class Semester {
 		this.dataDeFim = dataDeFim;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dataDeFim, dataDeInicio, id, nome, user);
+		return Objects.hash(dataDeFim, dataDeInicio, id, nome, userId);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class Semester {
 			return false;
 		Semester other = (Semester) obj;
 		return Objects.equals(dataDeFim, other.dataDeFim) && Objects.equals(dataDeInicio, other.dataDeInicio)
-				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome) && Objects.equals(user, other.user);
+				&& Objects.equals(id, other.id) && Objects.equals(nome, other.nome) && Objects.equals(userId, other.userId);
 	}
 	
 }
