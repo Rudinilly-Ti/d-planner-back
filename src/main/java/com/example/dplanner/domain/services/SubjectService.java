@@ -45,6 +45,10 @@ public class SubjectService {
     return Optional.of(subjects);
   }
 
+  public List<Subject> findBySemester_User_Id(Long id) {
+    return repository.findBySemester_User_Id(id);
+  }
+
   public Optional<Subject> findById(Long id) {
     return repository.findById(id);
   }

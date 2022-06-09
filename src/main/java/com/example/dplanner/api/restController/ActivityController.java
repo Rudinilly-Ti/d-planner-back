@@ -65,19 +65,26 @@ public class ActivityController {
 	}
 
 	@GetMapping(value = "/listByUser/{id}")
-	public List<Activity> listByUser(@PathVariable(value = "id") Long id ) {
+	public List<Activity> listByUser(@PathVariable(value = "id") Long id) {
 		return service.findByUser(id);
 
 	}
+
 	@GetMapping(value = "/listAllByUser/{id}")
-	public List<Activity> findAllByUser(@PathVariable(value = "id") Long id ) {
+	public List<Activity> findAllByUser(@PathVariable(value = "id") Long id) {
 		return service.findAllByUser(id);
 	}
 
+	@GetMapping(value = "/listBySubject/{id}")
+	public List<Activity> listBySubject(@PathVariable(value = "id") Long id) {
+		return service.findBySubject(id);
+
+	}
+
 	@GetMapping(value = "/listByUserType/{id}/{type}")
-	public List<Activity> findByType(@PathVariable(value = "id") Long id, 
+	public List<Activity> findByType(@PathVariable(value = "id") Long id,
 			@PathVariable(value = "type") int type) {
-		return service.findByUserAndType(id,type);
+		return service.findByUserAndType(id, type);
 
 	}
 

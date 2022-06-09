@@ -9,4 +9,7 @@ import com.example.dplanner.domain.entityes.Subject;
 
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
   public List<Subject> findBySemester(Semester semester);
+
+  public List<Subject> findBySemester_User_Id(Long id);
+
 }

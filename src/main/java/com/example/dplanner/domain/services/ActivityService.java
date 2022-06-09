@@ -34,15 +34,23 @@ public class ActivityService {
 	public List<Activity> index() {
 		return repository.findAll();
 	}
+
 	public List<Activity> findByUser(Long ID) {
-		return repository.findByStatusAndSubject_Semester_User_id("ABERTO",ID);
+		return repository.findByStatusAndSubject_Semester_User_id("ABERTO", ID);
 	}
+
 	public List<Activity> findAllByUser(Long ID) {
 		return repository.findBySubject_Semester_User_id(ID);
 	}
-	public List<Activity> findByUserAndType(Long ID,int type) {
-		return repository.findByStatusAndTypeAndSubject_Semester_User_id("ABERTO",type, ID);
+
+	public List<Activity> findByUserAndType(Long ID, int type) {
+		return repository.findByStatusAndTypeAndSubject_Semester_User_id("ABERTO", type, ID);
 	}
+
+	public List<Activity> findBySubject(Long id) {
+		return repository.findBySubject_Id(id);
+	}
+
 	public Activity show(Long id) {
 		return repository.findById(id).orElse(null);
 	}

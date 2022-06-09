@@ -51,6 +51,15 @@ public class SubjectController {
       return ResponseEntity.notFound().build();
   }
 
+  @GetMapping("/findUserId/{id}")
+  public ResponseEntity<List<Subject>> findBySemester_User_Id(@PathVariable Long id) {
+    var semester = service.findBySemester_User_Id(id);
+    if (semester != null)
+      return ResponseEntity.ok(semester);
+    else
+      return ResponseEntity.notFound().build();
+  }
+
   @PutMapping("/{id}")
   public ResponseEntity<Subject> update(@PathVariable Long id, @RequestBody SubjectDto dto) {
     var semester = service.update(id, dto);
