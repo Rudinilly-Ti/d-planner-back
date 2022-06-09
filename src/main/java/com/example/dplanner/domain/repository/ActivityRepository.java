@@ -11,4 +11,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 	public List<Activity> findBySubject_Semester_User_id(long id);
 	public List<Activity> findByStatusAndSubject_Semester_User_id(String status,long id);
 	public List<Activity> findByStatusAndTypeAndSubject_Semester_User_id(String status,int type, long id );
+	public List<Activity> findBySubject_Id(Long id);
 }
