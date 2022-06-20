@@ -3,14 +3,7 @@ package com.example.dplanner.domain.entityes;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -26,10 +19,10 @@ public class Semester {
 	@Value("Semestre ${id}")
 	private String nome;
 	
-    @NotBlank(message = "Data de inicio não pode ser nula")
+    // @NotBlank(message = "Data de inicio não pode ser nula")
     private Date dataDeInicio;
     
-    @NotBlank(message = "Data de fim não pode ser nula")
+    // @NotBlank(message = "Data de fim não pode ser nula")
     private Date dataDeFim;
     
 		@JsonIgnore

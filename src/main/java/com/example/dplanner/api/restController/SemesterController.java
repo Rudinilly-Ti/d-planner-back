@@ -1,7 +1,11 @@
 package com.example.dplanner.api.restController;
 
+import com.example.dplanner.api.dto.CreateSemesterDto;
 import com.example.dplanner.domain.entityes.Semester;
+import com.example.dplanner.domain.repository.UserRepository;
 import com.example.dplanner.domain.services.SemesterService;
+import com.example.dplanner.domain.services.UserService;
+
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +25,18 @@ public class SemesterController {
     @Autowired
     SemesterService service;
 
+    @Autowired
+    UserRepository userRepo;
+
     @PostMapping
-    public ResponseEntity<Semester> create(@Valid @RequestBody Semester semester) {
+    public ResponseEntity<Semester> create(@Valid @RequestBody CreateSemesterDto dto) {
         
+        Semester semester = new Semester();
+        semester.setNome(dto.getNome());
+        semester.setDataDeInicio(dto.getDataInicio());
+        semester.setDataDeFim(dto.getDataFim());
+        semester.setUser(userRepo.findById(dto.getUserId()).get());
+
         Semester semesterTMP = service.create(semester);
 
         if (semesterTMP != null)
