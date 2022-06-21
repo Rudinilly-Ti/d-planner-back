@@ -35,7 +35,7 @@ public class SemesterController {
         return service.findByNome(nome);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/findByUser/{userId}")
     public List<Semester> findSemester(@PathVariable Long userId) {
         return service.search(userId);
     }
