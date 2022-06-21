@@ -30,7 +30,7 @@ public class SemesterController {
             return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping
+    @GetMapping("/findByNome")
     public Semester findByNome(@PathVariable String nome) {
         return service.findByNome(nome);
     }
