@@ -31,7 +31,7 @@ public class SemesterController {
     }
 
     @GetMapping("/findByNome")
-    public Semester findByNome(@PathVariable String nome) {
+    public Semester findByNome(@RequestBody String nome) {
         return service.findByNome(nome);
     }
 
