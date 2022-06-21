@@ -3,24 +3,21 @@ package com.example.dplanner.domain.entityes;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Table(name = "tb_activities")
 public class Activity {
+	public enum ActivityType {
+		ACTIVITY,
+		PRESENTATION,
+		EVALUATION
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -38,15 +35,15 @@ public class Activity {
 	@NotNull(message = "Data de entrega não pode ser nula")
 	private Date dataDeEntrega;
 
-	@Value("1")
-	private int type; // 1-ATIVIDADE ,2- APRESENTAÇÃO, 3-AVALIACAO;
+	@Value("ACTIVITY")
+	private ActivityType type; // 1-ATIVIDADE ,2- APRESENTAÇÃO, 3-AVALIACAO;
 	@Value("ABERTO")
 	private String status; // ABERTO, ENTREGUE E PERDIDO
 
 	public Activity() {
 	}
 
-	public Activity(Long id, String nome, Date dataDeEntrega, int type, String status, Subject subject) {
+	public Activity(Long id, String nome, Date dataDeEntrega, ActivityType type, String status, Subject subject) {
 		this.nome = nome;
 		this.dataDeEntrega = dataDeEntrega;
 		this.type = type;
@@ -89,15 +86,14 @@ public class Activity {
 	}
 
 	public void setDataDeEntrega(Date dataDeEntrega) {
-		Date date = new Date();
 		this.dataDeEntrega = dataDeEntrega;
 	}
 
-	public int getType() {
+	public ActivityType getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(ActivityType type) {
 		this.type = type;
 	}
 

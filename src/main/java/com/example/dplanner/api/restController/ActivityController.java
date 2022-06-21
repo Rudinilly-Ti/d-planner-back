@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dplanner.domain.entityes.Activity;
+import com.example.dplanner.domain.entityes.Activity.ActivityType;
 import com.example.dplanner.domain.services.ActivityService;
 
 @RestController
@@ -83,7 +84,7 @@ public class ActivityController {
 
 	@GetMapping(value = "/listByUserType/{id}/{type}")
 	public List<Activity> findByType(@PathVariable(value = "id") Long id,
-			@PathVariable(value = "type") int type) {
+			@PathVariable(value = "type") ActivityType type) {
 		return service.findByUserAndType(id, type);
 
 	}

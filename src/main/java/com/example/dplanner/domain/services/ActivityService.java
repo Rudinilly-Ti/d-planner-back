@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dplanner.domain.entityes.Activity;
 import com.example.dplanner.domain.entityes.Subject;
+import com.example.dplanner.domain.entityes.Activity.ActivityType;
 import com.example.dplanner.domain.repository.ActivityRepository;
 
 @Service
@@ -43,7 +44,7 @@ public class ActivityService {
 		return repository.findBySubject_Semester_User_id(ID);
 	}
 
-	public List<Activity> findByUserAndType(Long ID, int type) {
+	public List<Activity> findByUserAndType(Long ID, ActivityType type) {
 		return repository.findByStatusAndTypeAndSubject_Semester_User_id("ABERTO", type, ID);
 	}
 
