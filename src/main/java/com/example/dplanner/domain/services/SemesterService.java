@@ -26,6 +26,10 @@ public class SemesterService {
         return repository.findByNome(nome);
     }
 
+    public Semester findById(Long id){
+        return repository.findById(id).get();
+    }
+
     //Update
     public Semester update(Semester semester) {
         Optional<Semester> tmp = repository.findById(semester.getId());

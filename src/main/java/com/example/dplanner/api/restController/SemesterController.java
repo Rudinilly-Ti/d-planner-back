@@ -40,6 +40,11 @@ public class SemesterController {
         return service.search(userId);
     }
 
+    @GetMapping("/{id}")
+    public Semester findById(@PathVariable Long id) {
+        return service.findById(id);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Semester> update(@PathVariable Long id, @RequestBody Semester semester) {
         semester.setId(id);
