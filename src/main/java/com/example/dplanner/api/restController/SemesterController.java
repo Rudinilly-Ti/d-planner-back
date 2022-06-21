@@ -1,23 +1,14 @@
 package com.example.dplanner.api.restController;
 
-import com.example.dplanner.api.dto.CreateSemesterDto;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.dplanner.domain.entityes.Semester;
 import com.example.dplanner.domain.repository.UserRepository;
 import com.example.dplanner.domain.services.SemesterService;
-import com.example.dplanner.domain.services.UserService;
-
-import java.util.List;
-import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/semesters")
@@ -28,15 +19,9 @@ public class SemesterController {
     @Autowired
     UserRepository userRepo;
 
-    @PostMapping
-    public ResponseEntity<Semester> create(@Valid @RequestBody CreateSemesterDto dto) {
-        
-        Semester semester = new Semester();
-        semester.setNome(dto.getNome());
-        semester.setDataDeInicio(dto.getDataInicio());
-        semester.setDataDeFim(dto.getDataFim());
-        semester.setUser(userRepo.findById(dto.getUserId()).get());
-
+    @PostMapping("/{userId}")
+    public ResponseEntity<Semester> create(@PathVariable Long userId, @RequestBody Semester semester) {
+        semester.setUser(userRepo.findById(userId).get());
         Semester semesterTMP = service.create(semester);
 
         if (semesterTMP != null)
@@ -46,7 +31,7 @@ public class SemesterController {
     }
 
     @GetMapping
-    public List<Semester> list(){
+    public List<Semester> list() {
         return service.list();
     }
 
@@ -60,7 +45,7 @@ public class SemesterController {
         semester.setId(id);
 
         Semester novoSemestre = service.update(semester);
-        
+
         if (novoSemestre != null)
             return ResponseEntity.ok(semester);
         else
@@ -69,9 +54,9 @@ public class SemesterController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Semester> delete(@PathVariable Long id) {
-        
+
         Semester semester = service.delete(id);
-        
+
         if (semester != null)
             return ResponseEntity.ok(semester);
         else
