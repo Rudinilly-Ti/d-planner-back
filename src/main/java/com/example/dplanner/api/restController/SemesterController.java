@@ -31,8 +31,8 @@ public class SemesterController {
     }
 
     @GetMapping
-    public List<Semester> list() {
-        return service.list();
+    public Semester findByNome(@PathVariable String nome) {
+        return service.findByNome(nome);
     }
 
     @GetMapping("/{userId}")

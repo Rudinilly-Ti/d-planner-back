@@ -7,4 +7,5 @@ import com.example.dplanner.domain.entityes.Semester;
 
 public interface SemesterRepository extends JpaRepository<Semester, Long> {
     public List<Semester> findByUserId(Long userId);
+    public Semester findByNome(String nome);
 }

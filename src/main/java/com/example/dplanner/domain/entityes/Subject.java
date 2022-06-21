@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_subjects")
@@ -26,7 +25,6 @@ public class Subject {
 
 	private String professor;
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_semester")
 	private Semester semester;

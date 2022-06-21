@@ -21,8 +21,9 @@ public class SemesterService {
     public List<Semester> search(Long userId){
         return repository.findByUserId(userId);
     }
-    public List<Semester> list(){
-        return repository.findAll();
+
+    public Semester findByNome(String nome){
+        return repository.findByNome(nome);
     }
 
     //Update
